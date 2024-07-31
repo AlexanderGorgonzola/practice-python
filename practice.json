@@ -1,0 +1,21 @@
+{
+    "firstname": "Alex",
+    "lastname": "Gorgonzola",
+    "hobbies": ["eating", "running", "video games"],
+    "age": 35,
+    "hasChildren": false,
+    "favoriteCharaters": [
+        {
+            "name": "Nanami",
+            "from": "Jujustu Kaisen"
+        },
+        {
+            "name": "Globox",
+            "from": "Rayman"
+        },
+        {
+            "name": "Phen-228",
+            "from": "Dr. Nowhere"
+        }
+    ]
+}
