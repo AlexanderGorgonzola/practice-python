@@ -17,5 +17,37 @@ person = json.loads(personJSN)
 #see whats in the json
 with open("person.json", "r") as file:
     person = json.load(file)
+    print("\n")
     print(person)
 
+
+
+class User:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+user = User("Max", 27)
+def encode_user(o):
+    if isinstance(o, User):
+        return {"name": o.name, "age": o.age, o.__class__.__name__: True}
+    else:
+        raise TypeError("Nah, Id Glitch")
+    #W
+
+from json import JSONEncoder
+class UserEncoder(JSONEncoder):
+    def default(self, o):
+        if isinstance(o, User):
+            return {"name": o.name, "age": o.age, o.__class__.__name__: True}
+        return JSONEncoder.default(self, o)
+userJSN = json.dumps(user, default=encode_user)
+print(userJSN)
+print("\n")
+UserJSON = UserEncoder().encode(user)
+print("\n")
+print(UserJSON)
+
+user = json.loads(UserJSON)
+print("\n")
+print(user.name)
