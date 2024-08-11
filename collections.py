@@ -1,5 +1,4 @@
-from collections import Counter, namedtuple, OrderedDict
-from collections import defaultdict, deque
+from collections import Counter, namedtuple, OrderedDict, defaultdict, deque
 #COUNTERS#
 #a counter shows how many times an item occurs
 print("Counters:")

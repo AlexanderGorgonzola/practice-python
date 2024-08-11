@@ -9,42 +9,40 @@ def square_numbers():
         """Simple stuff"""
         i * i
         time.sleep(0.1)
+if __name__ == "__main__":
+    print("Start process")
+    processes = []
+    num_processes = os.cpu_count()
 
-print("Start process")
-processes = []
-num_processes = os.cpu_count()
+    for i in range(num_processes):
+        p = Process(target=square_numbers) #insert args as a tuple
+        processes.append(p)
 
-for i in range(num_processes):
-    p = Process(target=square_numbers) #insert args as a tuple
-    processes.append(p)
+    """Start"""
+    for p in processes:
+        p.start()
 
-"""Start"""
-for p in processes:
-    p.start()
+    """Join"""
+    for p in processes:
+        p.join()
 
-"""Join"""
-for p in processes:
-    p.join()
-
-print("End process")
-
-
-print("Start thread")
-threads = []
-num_threads = 10
-
-for i in range(num_threads):
-    t = Thread(target=square_numbers)
-    threads.append(t)
-
-"""Start"""
-for t in threads:
-    t.start()
-
-"""Join"""
-for t in threads:
-    t.join()
-
-print("End thread")
+    print("End process")
 
 
+    print("Start thread")
+    threads = []
+    num_threads = 10
+
+    for i in range(num_threads):
+        t = Thread(target=square_numbers)
+        threads.append(t)
+
+    """Start"""
+    for t in threads:
+        t.start()
+
+    """Join"""
+    for t in threads:
+        t.join()
+
+    print("End thread")
