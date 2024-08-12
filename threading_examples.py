@@ -1,7 +1,15 @@
-from threading import Thread, Lock
+from threading import Thread, Lock, current_thread
 from queue import Queue
 import time
 database_value = 0
+
+
+def worker(q, lock):
+    while True:
+        value = q.get()
+        with lock:
+            print(f"in {current_thread().name} got {value}")
+        q.task_done()
 
 def increase(lock):
     global database_value
@@ -40,14 +48,17 @@ if __name__ == "__main__":
 if __name__=="__main__":
 
     q = Queue()
-    q.put(1)
-    q.put(2)
-    q.put(3)
+    lock = Lock()
+    num_threads = 10
 
-    first = q.get()
-    print(first)
+    for i in range(num_threads):
+        thread = Thread(target=worker, args=(q, lock))
+        thread.daemon = True
+        thread.start()
     
-    q.task_done()
+    for i in range(1, 12):
+        q.put(i)
+    
     q.join()
 
     """q.empty checks if its empty"""
