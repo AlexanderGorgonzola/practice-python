@@ -15,6 +15,8 @@ def square(numbers, queue):
 def make_negative(numbers, queue):
     for i in numbers:
         queue.put(-1*i)
+
+        
 if __name__=="__main__":
     lock = Lock()
 
